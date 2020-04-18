@@ -1,0 +1,55 @@
+<!--pages/fireMan/fireman.wxml-->
+<view>
+	<view class="head-container">
+		<text class="head-text">招待费申请</text>
+	</view>
+
+	<view>
+		<text>申请人： </text>
+		<view class="textarea-wrp">
+			<textarea auto-height />
+			</view>
+</view>
+
+<view>
+	<view class="section">
+  <view class="section__title">申请日期</view>
+  <picker class="textarea-date" mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+    <view class="picker">
+      当前选择: {{date}}
+    </view>
+  </picker>
+</view>
+</view>
+
+	<view>
+		<text>对象单位： </text>
+		<view class="textarea-wrp">
+			<textarea auto-height />
+			</view>
+</view>
+	<view>
+		<text>申请金额(元)： </text>
+		<view class="textarea-wrp">
+			 <input type="number" auto-focus focus='{{focus}}' value="{{value}}" title="" bindinput="handleInput" bindblur="validate" maxlength="5" placeholder="请输入费用金额..." />
+			</view>
+</view>
+  <view >   
+    <button bindtap="add">提交</button>
+  </view>
+
+
+<view>
+<view >
+<text>绑定数据-UserInfo 表中
+</text>
+</view>
+
+<input bindinput="inputeedit" type="text" data-="obj" data-item="item" value="{{OthName}}"></input>
+
+</view>
+
+
+
+
+</view>
