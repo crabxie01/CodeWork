@@ -13,7 +13,8 @@ App({
     this.globalData = {
       localUserInfo:null,
       openid:null,
-      serverUserInfo:null
+      serverUserInfo:null,
+      Session_key:null
     }
   }
 })

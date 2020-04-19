@@ -1,5 +1,35 @@
 <!--myform/myform01.wxml-->
-<view class="userinfo">
+<view>
+<text width="100%">我的申请</text>
+</view>
+
+<view>
+<!-- 外层view -->
+  <view class='out' id="{{item.id}}" wx:for="{{item}}" wx:key="unique" bindtap='viewDetails' data-buildId="{{item.buildId}}" data-status="{{item.status}}">
+  <!--  列表上方的view-->
+    <view class="top">
+      <text id="t-id">{{item.buildId}}</text>
+      <image id="addimg" src="./img/address.png"></image>
+      <text id="t-name">{{item.buildName}}</text>
+      <!-- 放在列表上方view中的小红点 -->
+      	<view wx:if="{{item.status == 1}}" class="dian_hide"></view>
+  <view wx:else ="{{item.status == 0}}" class="dian_show"></view>
+
+    </view>
+    <!--  列表下方的view-->
+    <view class="down">
+      <text id="t-fault">故障数量：{{item.fault}}</text>
+      <text id="time">时间：{{item.time}}</text>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+
+<view class="userinfo" position="flexed">
     <button 
       open-type="getUserInfo" 
       bindgetuserinfo="onGetUserInfo"
@@ -8,8 +38,9 @@
       size="default"
     ></button>
     <view class="userinfo-nickname-wrapper">
-    <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">{{theName}}</button>
-    <view wx:else>请升级微信版本</view>     
+    <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">{{theName}}</button>    
+    <view wx:else>请升级微信版本</view>    
+    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">{{getPhoneNub}}</button>
     </view>
   </view>
-<text>myform/myform01.wxml</text>
+
