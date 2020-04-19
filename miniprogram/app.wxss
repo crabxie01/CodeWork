@@ -27,9 +27,8 @@ page {
 }
 
 .userinfo, .uploader, .tunnel {
-  margin-top: 40rpx;
   height: 100rpx;
-  width: 50%;
+
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-left: none;
@@ -45,10 +44,10 @@ page {
 }
 
 .userinfo-avatar {
-  width: 100rpx;
+  width: 50rpx;
   height: 100rpx;
   margin: 10rpx;
-  border-radius: 50%;
+  border-radius: 50rpx;
   background-size: cover;
   background-color: white;
 }

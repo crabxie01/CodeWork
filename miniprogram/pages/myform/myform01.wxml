@@ -29,7 +29,7 @@
 
 
 
-<view class="userinfo" position="flexed">
+<view class="userinfo">
     <button 
       open-type="getUserInfo" 
       bindgetuserinfo="onGetUserInfo"
@@ -39,8 +39,9 @@
     ></button>
     <view class="userinfo-nickname-wrapper">
     <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">{{theName}}</button>    
-    <view wx:else>请升级微信版本</view>    
-    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">{{getPhoneNub}}</button>
+    <view wx:else>请升级微信版本</view>   
+    <input placeholder="请输入公司通讯录中手机号,否则无法识别!!!"></input> 
+    <button bindtap="btnInputPhoneNumber">{{btnPhonNum}}</button>
     </view>
   </view>
 

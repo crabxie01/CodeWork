@@ -11,7 +11,8 @@ Component({
     requestResult: '',
     theName: '点击登录',
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    getPhoneNub:'默认手机'
+    getPhoneNub: '默认手机',
+    btnPhonNum: '提交手机号'
   },
   methods: {
     onLoad: function () {
@@ -38,8 +39,8 @@ Component({
                   success: res => {
                     console.log('[云函数] [login] user openid: ', res.result.openid)
                     app.globalData.openid = res.result.openid
-                    app.globalData.Session_key=res.result.Session_key
-                   //得到服务器上登录用户的全部信息
+                    app.globalData.Session_key = res.result.Session_key
+                    //得到服务器上登录用户的全部信息
                     wx.cloud.callFunction({
                       name: "yunuserinfo",
                       data: {
@@ -54,21 +55,22 @@ Component({
                 })
               }
             })
-          } 
+          }
         }
       })
     },
     //点击登录成功之后,调用的页面
     bindGetUserInfo: function (e) {
-     //第一次授权后,得到Openid放到数据库中去啊
-     //获取OpenId 放在Gloab中
-     wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        console.log('第一次授权后,得到Openid放到数据库中去啊', res.result.openid)
-        app.globalData.openid = res.result.openid
-      }})
+      //第一次授权后,得到Openid放到数据库中去啊
+      //获取OpenId 放在Gloab中
+      wx.cloud.callFunction({
+        name: 'login',
+        data: {},
+        success: res => {
+          console.log('第一次授权后,得到Openid放到数据库中去啊', res.result.openid)
+          app.globalData.openid = res.result.openid
+        }
+      })
       console.log('1111修改图标和显示昵称')
       //修改图标和显示昵称
       if (!this.data.logged && e.detail.userInfo) {
@@ -77,49 +79,16 @@ Component({
           avatarUrl: e.detail.userInfo.avatarUrl,
           userInfo: e.detail.userInfo
         })
-      }     
+      }
     }
   },
-///
-getPhoneNumber(e) {
-  var msg = e.detail.errMsg, that = this;
-  var that = this;
-  var sessionID=that.app.globalData.Session_key,
-  encryptedDataStr=e.detail.encryptedData,
-  iv= e.detail.iv;
-  if (msg == 'getPhoneNumber:ok') {
-    wx.checkSession({
-      success:function(){
-        that.deciyption(sessionID,encryptedDataStr,iv);
-      },
-      fail:function(){
-        wx.login({
-          success: res => {
-            console.log(res,'sessionkey过期')
-            wx.request('url',{code:res.code},function(res){
-              var userinfo=res.data.data;
-              wx.setStorageSync('userinfo',userinfo);
-              that.setData({
-                userinfo:userinfo
-              });
-              that.deciyption(userinfo.Session_key,encryptedDataStr,iv);
-            })
-          }
-        })
-      }
-    })
-  }
-},
-deciyption(sessionID,encryptedDataStr,iv){
-  wx.request('url', {
-    sessionID: sessionID,
-    encryptedDataStr:encryptedDataStr,
-    iv: iv
-  }, function (res) {
-  //这个res即可返回用户的手机号码
-  })
-},
-///
+  ///
+  //提交个人手机号到数据库中
+  btnInputPhoneNumber: function (e) {
+    let u_openid = app.globalData.openid
+    //把当前openid 与手机绑定,来识别本人
+  },
+  ///
 
 
 
